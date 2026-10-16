@@ -1,0 +1,380 @@
+export const portfolioCategories = [
+  { id: "all", label: "All Productions (10)" },
+  { id: "commercial", label: "Commercial & Motion" },
+  { id: "healthcare", label: "Healthcare & Authority" },
+  { id: "social", label: "Reels & Social Shorts" },
+  { id: "branding", label: "Brand Stories & Visuals" },
+];
+
+export const portfolioProjects = [
+  {
+    id: "video-01",
+    title: "Kinetic Brand Commercial",
+    client: "Rohobot Creative Studio",
+    industry: "Commercial & Advertising",
+    year: "2024",
+    category: "commercial",
+    categoryLabel: "Commercial & Motion",
+    videoUrl: "/videos/video-01.mp4",
+    headlineMetric: "High-Energy Kinetic Pacing & Color Grade",
+    summary:
+      "High-octane commercial cinematography and creative short-form visual direction designed for maximum viewer hook rate and brand prestige.",
+    deliverables: ["Commercial Video", "Dynamic Editing", "Color Grading", "Sound FX"],
+    badge: "Commercial Ad",
+    accentColor: "#D4AF37",
+    gradient: "from-amber-500/30 via-yellow-900/20 to-transparent",
+    previewMetrics: [
+      { label: "Viewer Hook Rate", before: "22%", after: "74%", change: "+236%" },
+      { label: "Completion Rate", before: "14%", after: "58%", change: "+314%" },
+      { label: "Social Shares", before: "180", after: "2,400+", change: "+1233%" },
+    ],
+    challenge:
+      "Creating an electric, scroll-stopping visual hook that captures immediate viewer attention within the first 2 seconds.",
+    howWeCollaborated: [
+      "Designed dynamic velocity-ramped camera moves and precision sound design.",
+      "Engineered cinematic LUT grading tuned to Rohobot's signature aesthetic.",
+      "Optimized aspect ratios and compression for instant playback across platforms.",
+    ],
+    testimonial: {
+      quote:
+        "The pacing and cinematic execution Rohobot brought to this commercial set a completely new standard for our video assets.",
+      author: "Creative Producer",
+      role: "Campaign Lead",
+      company: "Studio Partner",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-02",
+    title: "Dr. Seid • Medical Authority Series",
+    client: "Abrar Specialized Healthcare",
+    industry: "Healthcare & Medicine",
+    year: "2024",
+    category: "healthcare",
+    categoryLabel: "Healthcare & Authority",
+    videoUrl: "/videos/video-02.mp4",
+    headlineMetric: "+380% Patient Inquiries & Viral Reach",
+    summary:
+      "Educational clinical talking-head reels and patient acquisition storytelling that positions Dr. Seid as a top trusted medical authority.",
+    deliverables: ["Medical Storytelling", "Reels & Shorts", "Authority Positioning"],
+    badge: "Clinical Authority",
+    accentColor: "#38BDF8",
+    gradient: "from-sky-500/30 via-blue-900/20 to-transparent",
+    previewMetrics: [
+      { label: "Monthly Patient Inquiries", before: "35", after: "168", change: "+380%" },
+      { label: "Organic Video Reach", before: "4.2K", after: "240K+", change: "+5600%" },
+      { label: "Appointment Conversion", before: "3.1%", after: "9.8%", change: "+216%" },
+    ],
+    challenge:
+      "Communicating sensitive medical topics with approachable empathy and clinical accuracy to drive verified patient bookings.",
+    howWeCollaborated: [
+      "Structured concise talking-head scripts addressing patient FAQ pain-points.",
+      "Added professional clinical studio lighting, microphones, and crisp subtitles.",
+      "Published consistently across Instagram Reels and TikTok with targeted hashtags.",
+    ],
+    testimonial: {
+      quote:
+        "Rohobot made our clinical communication feel natural, authoritative, and deeply engaging. Our patient bookings surged.",
+      author: "Dr. Seid",
+      role: "Lead Specialist",
+      company: "Abrar Clinic",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-03",
+    title: "Viral Hook Short-Form Reel",
+    client: "Rohobot Social Growth",
+    industry: "Social Media & Viral Content",
+    year: "2024",
+    category: "social",
+    categoryLabel: "Reels & Social Shorts",
+    videoUrl: "/videos/video-03.mp4",
+    headlineMetric: "High-Retention Instagram & TikTok Hook",
+    summary:
+      "Fast-paced hooks, dynamic subtitles, and motion graphics engineered for algorithm amplification and rapid viewer retention.",
+    deliverables: ["TikTok / Reels", "Motion Graphics", "Audience Retention"],
+    badge: "Viral Reel",
+    accentColor: "#F59E0B",
+    gradient: "from-amber-600/30 via-amber-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Average Watch Time", before: "4.2s", after: "18.6s", change: "+342%" },
+      { label: "Account Followers Gained", before: "120/mo", after: "3,800/mo", change: "+3066%" },
+      { label: "Organic Engagement", before: "1.2%", after: "6.4%", change: "+433%" },
+    ],
+    challenge:
+      "Cutting through crowded social feeds and keeping viewers locked until the final call to action.",
+    howWeCollaborated: [
+      "Engineered psychological pattern-interrupt hooks in the first 1.5 seconds.",
+      "Embedded animated captions with bold typographic emphasis.",
+      "A/B tested caption hooks across multiple platform demographics.",
+    ],
+    testimonial: {
+      quote:
+        "Rohobot understands modern short-form algorithms better than anyone. Every reel they produce performs consistently.",
+      author: "Growth Director",
+      role: "Social Lead",
+      company: "Digital Partner",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-04",
+    title: "Visual Brand Showcase",
+    client: "Creative Partner",
+    industry: "Branding & Visual Design",
+    year: "2024",
+    category: "branding",
+    categoryLabel: "Brand Stories & Visuals",
+    videoUrl: "/videos/video-04.mp4",
+    headlineMetric: "Premium Aesthetic & Visual Storytelling",
+    summary:
+      "Sleek product highlighting, kinetic typography, and immersive ambient lighting built to elevate brand perception.",
+    deliverables: ["Brand Identity", "Product Showcase", "Visual Aesthetic"],
+    badge: "Brand Spotlight",
+    accentColor: "#EAB308",
+    gradient: "from-yellow-500/30 via-amber-900/20 to-transparent",
+    previewMetrics: [
+      { label: "Brand Sentiment Index", before: "68%", after: "94%", change: "+38%" },
+      { label: "Profile Visits", before: "800", after: "5,200", change: "+550%" },
+      { label: "Direct Inbound Leads", before: "8", after: "42", change: "+425%" },
+    ],
+    challenge:
+      "Presenting a premium brand story that communicates luxury craftsmanship and builds instant consumer trust.",
+    howWeCollaborated: [
+      "Shot with shallow depth of field, macro lenses, and synchronized rim lighting.",
+      "Composed tailored background musical pacing to reinforce brand elegance.",
+      "Created versatile cuts for Instagram feed, reels, and hero banner displays.",
+    ],
+    testimonial: {
+      quote:
+        "The aesthetic caliber of this video instantly elevated our brand identity to an international luxury standard.",
+      author: "Brand Director",
+      role: "Creative Head",
+      company: "Luxury Partner",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-05",
+    title: "Kinetic Motion & Transition Reel",
+    client: "Rohobot Motion Suite",
+    industry: "Motion Design & Advertising",
+    year: "2024",
+    category: "commercial",
+    categoryLabel: "Commercial & Motion",
+    videoUrl: "/videos/video-05.mp4",
+    headlineMetric: "Seamless Scene Transitions & Sound Design",
+    summary:
+      "High-energy sound design, seamless scene transitions, and scroll-stopping pacing that drives high engagement.",
+    deliverables: ["Kinetic Motion", "Sound Design", "Ad Creative"],
+    badge: "Motion Reel",
+    accentColor: "#F97316",
+    gradient: "from-orange-500/30 via-amber-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Click-Through Rate", before: "1.1%", after: "4.7%", change: "+327%" },
+      { label: "Cost Per Acquisition", before: "$14.20", after: "$4.80", change: "-66%" },
+      { label: "Return on Ad Spend", before: "1.8x", after: "5.2x", change: "+188%" },
+    ],
+    challenge:
+      "Retaining consumer interest during paid ad distribution and driving decisive clicks to the checkout portal.",
+    howWeCollaborated: [
+      "Synchronized frame cuts to aggressive percussive audio beats.",
+      "Added whip-pan transitions and spatial motion text overlays.",
+      "Optimized for 9:16 mobile display and high-contrast OLED screens.",
+    ],
+    testimonial: {
+      quote:
+        "Our ad spend ROI spiked immediately once we replaced static creatives with Rohobot's kinetic motion video.",
+      author: "E-commerce Manager",
+      role: "Paid Ads Lead",
+      company: "Retail Brand",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-06",
+    title: "Dr. Seid • Clinical Care Feature",
+    client: "Dr. Seid Medical Practice",
+    industry: "Healthcare & Patient Education",
+    year: "2024",
+    category: "healthcare",
+    categoryLabel: "Healthcare & Authority",
+    videoUrl: "/videos/video-06.mp4",
+    headlineMetric: "Patient Trust & Organic Appointment Lift",
+    summary:
+      "Patient-first educational content designed to demystify complex medical procedures and earn organic patient bookings.",
+    deliverables: ["Healthcare Video", "Patient Trust", "Educational Content"],
+    badge: "Healthcare Spotlight",
+    accentColor: "#14B8A6",
+    gradient: "from-teal-500/30 via-emerald-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Consultation Inquiries", before: "18/mo", after: "72/mo", change: "+300%" },
+      { label: "Video Saves & Bookmarks", before: "45", after: "1,200+", change: "+2566%" },
+      { label: "Patient Show-Up Rate", before: "76%", after: "95%", change: "+25%" },
+    ],
+    challenge:
+      "Overcoming patient hesitation and fear of treatment through educational clarity and authoritative guidance.",
+    howWeCollaborated: [
+      "Filmed in a warm, welcoming clinical environment with clean acoustic capture.",
+      "Translated complex terminology into accessible, reassuring visual explanations.",
+      "Structured call-to-action cards connecting directly to the clinic's WhatsApp booking.",
+    ],
+    testimonial: {
+      quote:
+        "Patients literally come into the clinic saying they watched our Rohobot video and immediately decided to book.",
+      author: "Clinic Coordinator",
+      role: "Operations Lead",
+      company: "Dr. Seid Practice",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-07",
+    title: "Lifestyle & Urban Identity Campaign",
+    client: "Creative Partner",
+    industry: "Fashion & Lifestyle",
+    year: "2024",
+    category: "branding",
+    categoryLabel: "Brand Stories & Visuals",
+    videoUrl: "/videos/video-07.mp4",
+    headlineMetric: "Cinematic Portraiture & Urban Aesthetics",
+    summary:
+      "Cinematic portraiture, natural lighting, and modern urban storytelling that resonates with youth and lifestyle culture.",
+    deliverables: ["Lifestyle Direction", "Cinematography", "Storytelling"],
+    badge: "Lifestyle Film",
+    accentColor: "#EC4899",
+    gradient: "from-pink-500/30 via-rose-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Audience Impressions", before: "12K", after: "380K+", change: "+3066%" },
+      { label: "Story Mentions", before: "30", after: "640+", change: "+2033%" },
+      { label: "Direct Inquiries", before: "15", after: "88", change: "+486%" },
+    ],
+    challenge:
+      "Capturing natural, unforced urban energy while keeping the brand's premium value front and center.",
+    howWeCollaborated: [
+      "Conducted run-and-gun street cinematography with handheld stabilization.",
+      "Graded with rich filmic emulation and atmospheric color contrast.",
+      "Created rhythmic cuts matched to trending audio for organic platform lift.",
+    ],
+    testimonial: {
+      quote:
+        "Rohobot captured the soul of our lifestyle brand with effortless cinematic perfection.",
+      author: "Creative Director",
+      role: "Founder",
+      company: "Lifestyle Collective",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-08",
+    title: "Behind The Scenes & Production Craft",
+    client: "Rohobot Studio Production",
+    industry: "Media Production",
+    year: "2024",
+    category: "social",
+    categoryLabel: "Reels & Social Shorts",
+    videoUrl: "/videos/video-08.mp4",
+    headlineMetric: "Raw Authenticity & Production Quality",
+    summary:
+      "Authentic on-set creation, professional lighting setups, and raw creative storytelling demonstrating Rohobot's production standards.",
+    deliverables: ["BTS Content", "Studio Production", "Social Engagement"],
+    badge: "Production BTS",
+    accentColor: "#A855F7",
+    gradient: "from-purple-500/30 via-purple-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Engagement Ratio", before: "1.5%", after: "7.8%", change: "+420%" },
+      { label: "Direct Client Inbounds", before: "4", after: "26", change: "+550%" },
+      { label: "Brand Credibility Score", before: "7.2/10", after: "9.6/10", change: "+33%" },
+    ],
+    challenge:
+      "Proving agency craftsmanship and equipment capability through transparent, behind-the-scenes storytelling.",
+    howWeCollaborated: [
+      "Documented camera rigging, lens swaps, and director notes in real time.",
+      "Showcased before-and-after lighting breakdowns that highlight technical prowess.",
+      "Engineered viral social hooks around 'How we made this ad'.",
+    ],
+    testimonial: {
+      quote:
+        "Seeing the rigorous behind-the-scenes production gave us 100% confidence to hire Rohobot for our enterprise campaign.",
+      author: "Marketing VP",
+      role: "Executive Producer",
+      company: "Client Partner",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-09",
+    title: "Commercial Event & Showcase Reel",
+    client: "Enterprise Partner",
+    industry: "Corporate & Events",
+    year: "2024",
+    category: "commercial",
+    categoryLabel: "Commercial & Motion",
+    videoUrl: "/videos/video-09.mp4",
+    headlineMetric: "Dynamic Camera Work & Event Momentum",
+    summary:
+      "High-impact on-location coverage, dynamic camera movements, and promotional cuts capturing the energy of corporate showcases.",
+    deliverables: ["Event Coverage", "Promotional Cut", "Commercial Impact"],
+    badge: "Event Showcase",
+    accentColor: "#D4AF37",
+    gradient: "from-amber-500/30 via-yellow-950/20 to-transparent",
+    previewMetrics: [
+      { label: "Post-Event Lead Capture", before: "45", after: "210+", change: "+366%" },
+      { label: "Executive Shares", before: "12", after: "185", change: "+1441%" },
+      { label: "Sponsorship Inquiries", before: "3", after: "19", change: "+533%" },
+    ],
+    challenge:
+      "Turning live event footage into a cohesive commercial asset that continues to generate B2B leads long after the event ends.",
+    howWeCollaborated: [
+      "Operated multi-angle gimbal rigs to capture candid high-profile moments.",
+      "Delivered same-week turnaround with cinematic motion graphics and sponsor cards.",
+      "Produced multi-platform cuts for LinkedIn, website hero, and YouTube.",
+    ],
+    testimonial: {
+      quote:
+        "The event recap video Rohobot created looked like a high-budget international documentary.",
+      author: "Event Director",
+      role: "Summit Organizer",
+      company: "Enterprise Forum",
+      rating: 5,
+    },
+  },
+  {
+    id: "video-10",
+    title: "Corporate Vision & Brand Film",
+    client: "Corporate Partner",
+    industry: "Corporate & Enterprise",
+    year: "2024",
+    category: "branding",
+    categoryLabel: "Brand Stories & Visuals",
+    videoUrl: "/videos/video-10.mp4",
+    headlineMetric: "Executive Authority & Strategic Direction",
+    summary:
+      "Executive message delivery, high-standard corporate cinematography, and strategic brand vision for market leadership.",
+    deliverables: ["Corporate Film", "Brand Vision", "Strategic Communication"],
+    badge: "Corporate Film",
+    accentColor: "#64748B",
+    gradient: "from-slate-500/30 via-slate-900/20 to-transparent",
+    previewMetrics: [
+      { label: "Investor Deck Watch Time", before: "30%", after: "88%", change: "+193%" },
+      { label: "Partner Acquisition", before: "2", after: "11", change: "+450%" },
+      { label: "Brand Trust Rating", before: "74%", after: "96%", change: "+30%" },
+    ],
+    challenge:
+      "Articulating complex corporate vision and long-term milestones in a concise, emotionally persuasive video.",
+    howWeCollaborated: [
+      "Crafted an inspiring narrative arc aligned with executive leadership values.",
+      "Paired cinematic wide shots with intimate executive dialogue capture.",
+      "Mastered orchestral soundtrack and spatial sound design for theater playback.",
+    ],
+    testimonial: {
+      quote:
+        "This brand film galvanized our team, impressed our investors, and defined our public narrative for the year.",
+      author: "Managing Director",
+      role: "Executive Board",
+      company: "Corporate Group",
+      rating: 5,
+    },
+  },
+];
