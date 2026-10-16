@@ -19,6 +19,21 @@ function VideoCard({ project, onOpenModal }) {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  React.useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false));
+      }
+    }
+  }, []);
 
   const toggleSound = (e) => {
     e.stopPropagation();
@@ -32,8 +47,7 @@ function VideoCard({ project, onOpenModal }) {
     e.stopPropagation();
     if (videoRef.current) {
       if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
       } else {
         videoRef.current.pause();
         setIsPlaying(false);
@@ -53,20 +67,66 @@ function VideoCard({ project, onOpenModal }) {
           {/* VIDEO CANVAS (AUTOPLAY, LOOP, MUTED)                      */}
           {/* ======================================================== */}
           <div
-            className="relative aspect-[9/13] w-full bg-black overflow-hidden border-b border-amber-500/20 cursor-pointer"
+            className="relative aspect-[9/13] w-full bg-[#070A10] overflow-hidden border-b border-amber-500/20 cursor-pointer"
             onClick={() => onOpenModal(project)}
           >
-            {/* HTML5 Video with autoplay, loop, and muted as requested */}
+            {/* HTML5 Video with autoplay, loop, and muted */}
             <video
               ref={videoRef}
               src={project.videoUrl}
               autoPlay
               loop
               muted
+              defaultMuted
               playsInline
-              preload="metadata"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              preload="auto"
+              onLoadedData={() => setIsLoaded(true)}
+              onCanPlay={() => {
+                setIsLoaded(true);
+                if (videoRef.current && videoRef.current.paused) {
+                  videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+                }
+              }}
+              onError={(e) => {
+                console.warn(`Video load error: ${project.videoUrl}`, e);
+                setHasError(true);
+              }}
+              className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
+                isLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
             />
+
+            {/* Loading Skeleton Placeholder while video initial frames buffer */}
+            {!isLoaded && !hasError && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] animate-pulse pointer-events-none">
+                <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mb-2 bg-amber-500/10">
+                  <Film className="w-6 h-6 text-amber-400" />
+                </div>
+                <span className="text-[11px] font-mono text-amber-300/70">Loading Video...</span>
+              </div>
+            )}
+
+            {/* Error Fallback */}
+            {hasError && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] p-4 text-center">
+                <Film className="w-8 h-8 text-amber-500/60 mb-2" />
+                <span className="text-xs font-mono text-slate-300 mb-2">{project.title}</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setHasError(false);
+                    if (videoRef.current) {
+                      videoRef.current.load();
+                      videoRef.current.play().catch(() => {});
+                    }
+                  }}
+                  className="text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30"
+                >
+                  Retry Video
+                </button>
+              </div>
+            )}
 
             {/* Subtle dark gradient overlay at top and bottom of video */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/60 pointer-events-none" />

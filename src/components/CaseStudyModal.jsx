@@ -61,6 +61,7 @@ export default function CaseStudyModal({ project, isOpen, onClose, onSelectCTA }
                 controls
                 autoPlay
                 playsInline
+                preload="auto"
                 className="w-full max-h-[460px] object-contain bg-black"
               />
             </div>
