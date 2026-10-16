@@ -10,6 +10,17 @@ export default function TiltCard3D({
 }) {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsTouch(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+      );
+    }
+  }, []);
 
   // Mouse coordinate values normalized between -0.5 and 0.5
   const x = useMotionValue(0);
@@ -25,7 +36,7 @@ export default function TiltCard3D({
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-maxTilt, maxTilt]), springConfig);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
+    if (isTouch || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
 
     // Mouse coordinates relative to card
@@ -44,14 +55,29 @@ export default function TiltCard3D({
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    if (!isTouch) setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
+    if (!isTouch) {
+      setIsHovered(false);
+      x.set(0);
+      y.set(0);
+    }
   };
+
+  // On touch/mobile devices, return a streamlined hardware-accelerated 2D container
+  if (isTouch) {
+    return (
+      <div
+        className={`relative rounded-2xl border border-amber-500/25 bg-[#0A0D14]/90 transition-all duration-200 active:scale-[0.99] shadow-card-elevated ${className}`}
+      >
+        <div className="relative z-10 h-full w-full">
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div

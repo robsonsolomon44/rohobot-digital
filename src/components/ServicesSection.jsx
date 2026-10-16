@@ -40,7 +40,7 @@ export default function ServicesSection({ onSelectService }) {
   return (
     <section id="services" className="py-24 bg-[#05070B] relative border-t border-amber-500/15 overflow-hidden">
       {/* Background ambient gold glow */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-amber-500/10 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-amber-500/10 blur-[60px] md:blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}

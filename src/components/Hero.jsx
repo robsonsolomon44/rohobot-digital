@@ -56,8 +56,8 @@ export default function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#05070B]">
       {/* Background radial gold glow & dot matrix */}
-      <div className="absolute top-1/4 right-1/4 w-[650px] h-[650px] bg-gradient-to-tr from-amber-500/20 via-yellow-600/10 to-transparent blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute top-10 left-10 w-96 h-96 bg-amber-600/10 blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 right-1/4 w-[500px] lg:w-[650px] h-[500px] lg:h-[650px] bg-gradient-to-tr from-amber-500/20 via-yellow-600/10 to-transparent blur-[60px] sm:blur-[100px] md:blur-[160px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-10 w-72 sm:w-96 h-72 sm:h-96 bg-amber-600/10 blur-[50px] sm:blur-[80px] md:blur-[130px] pointer-events-none -z-10" />
 
       {/* Tech dot-matrix background pattern on right half */}
       <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 bg-[radial-gradient(rgba(212,175,55,0.22)_1.5px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_60%_50%,#000_50%,transparent_100%)] pointer-events-none -z-10" />
@@ -187,55 +187,51 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="absolute w-[380px] sm:w-[480px] md:w-[540px] h-[380px] sm:h-[480px] md:h-[540px] rounded-full bg-gradient-to-tr from-amber-500/35 via-yellow-500/25 to-transparent blur-[95px] pointer-events-none"
+              className="absolute w-[340px] sm:w-[480px] md:w-[540px] h-[340px] sm:h-[480px] md:h-[540px] rounded-full bg-gradient-to-tr from-amber-500/35 via-yellow-500/25 to-transparent blur-[50px] sm:blur-[80px] md:blur-[95px] pointer-events-none"
             />
 
             {/* Pure Circular Motion System (Significantly Scaled Up) */}
-            <div className="relative flex items-center justify-center w-[400px] sm:w-[500px] md:w-[560px] aspect-square">
+            <div className="relative flex items-center justify-center w-[340px] sm:w-[500px] md:w-[560px] aspect-square">
               
               {/* Concentric Golden Ring 5 (Outermost dashed celestial orbit) */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-                className="absolute w-[390px] sm:w-[490px] md:w-[550px] h-[390px] sm:h-[490px] md:h-[550px] rounded-full border border-dashed border-amber-500/20 pointer-events-none"
+                className="absolute w-[330px] sm:w-[490px] md:w-[550px] h-[330px] sm:h-[490px] md:h-[550px] rounded-full border border-dashed border-amber-500/20 pointer-events-none"
               />
 
               {/* Concentric Golden Ring 4 (Radiant orbital ring with rotating satellite bead) */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
-                className="absolute w-[345px] sm:w-[435px] md:w-[485px] h-[345px] sm:h-[435px] md:h-[485px] rounded-full border border-amber-500/30 shadow-[0_0_40px_rgba(212,175,55,0.22)] pointer-events-none"
+                className="absolute w-[295px] sm:w-[435px] md:w-[485px] h-[295px] sm:h-[435px] md:h-[485px] rounded-full border border-amber-500/30 shadow-[0_0_30px_rgba(212,175,55,0.22)] pointer-events-none"
               >
                 {/* Orbiting light beacon */}
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-amber-400 shadow-[0_0_20px_#F59E0B,0_0_35px_#D4AF37]" />
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-amber-400 shadow-[0_0_20px_#F59E0B]" />
               </motion.div>
 
               {/* Concentric Golden Ring 3 (Medium glowing ring with counter-orbit beacon) */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-                className="absolute w-[300px] sm:w-[380px] md:w-[425px] h-[300px] sm:h-[380px] md:h-[425px] rounded-full border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.38)] pointer-events-none"
+                className="absolute w-[255px] sm:w-[380px] md:w-[425px] h-[255px] sm:h-[380px] md:h-[425px] rounded-full border border-amber-400/50 shadow-[0_0_35px_rgba(245,158,11,0.3)] pointer-events-none"
               >
                 {/* Counter-orbit light beacon */}
                 <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-yellow-300 shadow-[0_0_18px_#FBBF24]" />
               </motion.div>
 
-              {/* Concentric Golden Ring 2 (Pulsing neon ring with breathing luminous glow) */}
+              {/* Concentric Golden Ring 2 (Pulsing neon ring with GPU-accelerated breathing opacity) */}
               <motion.div
                 animate={{
                   scale: [1, 1.025, 1],
-                  boxShadow: [
-                    '0 0 50px rgba(245,158,11,0.65), inset 0 0 20px rgba(245,158,11,0.35)',
-                    '0 0 85px rgba(245,158,11,0.95), inset 0 0 30px rgba(245,158,11,0.55)',
-                    '0 0 50px rgba(245,158,11,0.65), inset 0 0 20px rgba(245,158,11,0.35)',
-                  ],
+                  opacity: [0.75, 1, 0.75],
                 }}
                 transition={{
                   duration: 3.5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="absolute w-[265px] sm:w-[335px] md:w-[375px] h-[265px] sm:h-[335px] md:h-[375px] rounded-full border-[2.5px] border-amber-400 pointer-events-none z-10"
+                className="absolute w-[225px] sm:w-[335px] md:w-[375px] h-[225px] sm:h-[335px] md:h-[375px] rounded-full border-[2.5px] border-amber-400 shadow-[0_0_50px_rgba(245,158,11,0.7),inset_0_0_20px_rgba(245,158,11,0.35)] pointer-events-none z-10"
               />
 
               {/* Concentric Golden Ring 1 (Intense immediate rim directly hugging the emblem) */}

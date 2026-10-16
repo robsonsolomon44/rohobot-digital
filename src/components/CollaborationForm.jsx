@@ -92,8 +92,8 @@ export default function CollaborationForm({ preselectedTopic }) {
   return (
     <section id="contact" className="py-24 bg-[#05070B] relative border-t border-amber-500/15 overflow-hidden">
       {/* Background ambient gold glow */}
-      <div className="absolute top-1/2 right-10 w-96 h-96 bg-amber-500/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-yellow-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 right-10 w-96 h-96 bg-amber-500/10 blur-[60px] md:blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-yellow-600/10 blur-[60px] md:blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

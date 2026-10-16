@@ -6,11 +6,21 @@
   * {
     border-color: rgba(212, 175, 55, 0.16);
   }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     background-color: #05070B;
     color: #F8FAFC;
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+  video, img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;

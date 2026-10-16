@@ -10,8 +10,8 @@ export default function AboutUs() {
   return (
     <section id="about" className="py-24 bg-[#05070B] relative border-t border-amber-500/15 overflow-hidden">
       {/* Background ambient gold glow */}
-      <div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-amber-500/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-yellow-600/5 blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-amber-500/10 blur-[60px] md:blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-yellow-600/5 blur-[50px] md:blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* 1. About Us Header & Narrative */}

@@ -16,24 +16,55 @@ import TiltCard3D from './ui/TiltCard3D';
 import CaseStudyModal from './CaseStudyModal';
 
 function VideoCard({ project, onOpenModal }) {
+  const cardContainerRef = useRef(null);
   const videoRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  // Intersection Observer: Only play and decode when card enters viewport
   React.useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      const playPromise = videoRef.current.play();
+    const el = cardContainerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        rootMargin: '100px 0px',
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Manage playback based on visibility
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView) {
+      video.defaultMuted = isMuted;
+      video.muted = isMuted;
+      const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false));
       }
+    } else {
+      video.pause();
+      setIsPlaying(false);
     }
-  }, []);
+  }, [isInView, isMuted]);
 
   const toggleSound = (e) => {
     e.stopPropagation();
@@ -56,77 +87,79 @@ function VideoCard({ project, onOpenModal }) {
   };
 
   return (
-    <TiltCard3D
-      depth={16}
-      glare={true}
-      className="bg-[#0A0D14]/90 backdrop-blur-xl border border-amber-500/25 rounded-2xl overflow-hidden hover:border-amber-400/60 transition-all duration-300 flex flex-col justify-between shadow-2xl group h-full"
-    >
-      <div className="flex flex-col h-full justify-between">
-        <div>
-          {/* ======================================================== */}
-          {/* VIDEO CANVAS (AUTOPLAY, LOOP, MUTED)                      */}
-          {/* ======================================================== */}
-          <div
-            className="relative aspect-[9/13] w-full bg-[#070A10] overflow-hidden border-b border-amber-500/20 cursor-pointer"
-            onClick={() => onOpenModal(project)}
-          >
-            {/* HTML5 Video with autoplay, loop, and muted */}
-            <video
-              ref={videoRef}
-              src={project.videoUrl}
-              autoPlay
-              loop
-              muted
-              defaultMuted
-              playsInline
-              preload="auto"
-              onLoadedData={() => setIsLoaded(true)}
-              onCanPlay={() => {
-                setIsLoaded(true);
-                if (videoRef.current && videoRef.current.paused) {
-                  videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-                }
-              }}
-              onError={(e) => {
-                console.warn(`Video load error: ${project.videoUrl}`, e);
-                setHasError(true);
-              }}
-              className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
-                isLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
+    <div ref={cardContainerRef} className="h-full">
+      <TiltCard3D
+        depth={16}
+        glare={true}
+        className="bg-[#0A0D14]/90 backdrop-blur-xl border border-amber-500/25 rounded-2xl overflow-hidden hover:border-amber-400/60 transition-all duration-300 flex flex-col justify-between shadow-2xl group h-full"
+      >
+        <div className="flex flex-col h-full justify-between">
+          <div>
+            {/* ======================================================== */}
+            {/* VIDEO CANVAS (VIEWPORT-AWARE AUTOPLAY, LOOP, MUTED)       */}
+            {/* ======================================================== */}
+            <div
+              className="relative aspect-[9/13] w-full bg-[#070A10] overflow-hidden border-b border-amber-500/20 cursor-pointer"
+              onClick={() => onOpenModal(project)}
+            >
+              {/* HTML5 Video with viewport-aware lazy playback */}
+              <video
+                ref={videoRef}
+                src={project.videoUrl}
+                loop
+                muted={isMuted}
+                defaultMuted
+                playsInline
+                preload={isInView ? 'auto' : 'none'}
+                onLoadedData={() => setIsLoaded(true)}
+                onCanPlay={() => {
+                  setIsLoaded(true);
+                  if (isInView && videoRef.current && videoRef.current.paused) {
+                    videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+                  }
+                }}
+                onError={(e) => {
+                  if (isInView) {
+                    console.warn(`Video load error: ${project.videoUrl}`, e);
+                    setHasError(true);
+                  }
+                }}
+                className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
+                  isLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
 
-            {/* Loading Skeleton Placeholder while video initial frames buffer */}
-            {!isLoaded && !hasError && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] animate-pulse pointer-events-none">
-                <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mb-2 bg-amber-500/10">
-                  <Film className="w-6 h-6 text-amber-400" />
+              {/* Loading Skeleton Placeholder while video initial frames buffer */}
+              {!isLoaded && !hasError && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] animate-pulse pointer-events-none">
+                  <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mb-2 bg-amber-500/10">
+                    <Film className="w-6 h-6 text-amber-400" />
+                  </div>
+                  <span className="text-[11px] font-mono text-amber-300/70">Loading Video...</span>
                 </div>
-                <span className="text-[11px] font-mono text-amber-300/70">Loading Video...</span>
-              </div>
-            )}
+              )}
 
-            {/* Error Fallback */}
-            {hasError && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] p-4 text-center">
-                <Film className="w-8 h-8 text-amber-500/60 mb-2" />
-                <span className="text-xs font-mono text-slate-300 mb-2">{project.title}</span>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setHasError(false);
-                    if (videoRef.current) {
-                      videoRef.current.load();
-                      videoRef.current.play().catch(() => {});
-                    }
-                  }}
-                  className="text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30"
-                >
-                  Retry Video
-                </button>
-              </div>
-            )}
+              {/* Error Fallback */}
+              {hasError && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] p-4 text-center">
+                  <Film className="w-8 h-8 text-amber-500/60 mb-2" />
+                  <span className="text-xs font-mono text-slate-300 mb-2">{project.title}</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHasError(false);
+                      if (videoRef.current) {
+                        videoRef.current.load();
+                        videoRef.current.play().catch(() => {});
+                      }
+                    }}
+                    className="text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30"
+                  >
+                    Retry Video
+                  </button>
+                </div>
+              )}
 
             {/* Subtle dark gradient overlay at top and bottom of video */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/60 pointer-events-none" />
@@ -243,7 +276,8 @@ function VideoCard({ project, onOpenModal }) {
         </div>
       </div>
     </TiltCard3D>
-  );
+  </div>
+);
 }
 
 export default function PortfolioShowcase({ onSelectProjectCTA }) {
@@ -268,8 +302,8 @@ export default function PortfolioShowcase({ onSelectProjectCTA }) {
   return (
     <section id="portfolio" className="py-24 relative bg-[#05070B] border-t border-amber-500/15 overflow-hidden">
       {/* Background ambient gold glows */}
-      <div className="absolute top-1/3 left-0 w-[600px] h-[500px] bg-amber-500/10 blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-[500px] h-[400px] bg-yellow-600/10 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-[600px] h-[500px] bg-amber-500/10 blur-[60px] md:blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-[500px] h-[400px] bg-yellow-600/10 blur-[60px] md:blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
