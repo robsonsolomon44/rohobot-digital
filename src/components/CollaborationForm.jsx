@@ -99,10 +99,10 @@ export default function CollaborationForm({ preselectedTopic }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Authentic Call to Action from User Brief */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="lg:col-span-5 space-y-8"
           >
             <div>
@@ -217,20 +217,20 @@ export default function CollaborationForm({ preselectedTopic }) {
 
           {/* Right Column: 1-Screen Interactive Inquiry Form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="lg:col-span-7 bg-[#0A0D14] border border-amber-500/25 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.9)] relative"
           >
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
                 <motion.form
                   key="form"
-                  initial={{ opacity: 0, scale: 0.98 }}
+                  initial={{ opacity: 1, scale: 1 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                   onSubmit={handleSubmit}
                   className="space-y-6"
                 >

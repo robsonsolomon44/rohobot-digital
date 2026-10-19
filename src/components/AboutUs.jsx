@@ -16,10 +16,10 @@ export default function AboutUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* 1. About Us Header & Narrative */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="max-w-4xl mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs font-mono text-amber-400 mb-4 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
@@ -48,10 +48,10 @@ export default function AboutUs() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {/* Mission Card */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <TiltCard3D depth={30} glare={true} className="bg-[#0A0D14] border border-amber-500/25 h-full">
               <div className="p-8 h-full flex flex-col justify-between group">
@@ -75,10 +75,10 @@ export default function AboutUs() {
 
           {/* Vision Card */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
           >
             <TiltCard3D depth={30} glare={true} className="bg-[#0A0D14] border border-amber-500/25 h-full">
               <div className="p-8 h-full flex flex-col justify-between group">
@@ -104,7 +104,7 @@ export default function AboutUs() {
         {/* 4. Our Objectives Grid (7 Exact Objectives from brief) */}
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
@@ -125,10 +125,10 @@ export default function AboutUs() {
             {about.objectives.map((obj, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.4, delay: idx * 0.04 }}
               >
                 <TiltCard3D depth={15} glare={true} className="bg-[#0A0D14] border border-amber-500/20 h-full">
                   <div className="p-5 flex flex-col justify-between h-full">

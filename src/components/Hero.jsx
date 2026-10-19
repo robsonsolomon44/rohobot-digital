@@ -28,23 +28,20 @@ const PRECOMPUTED_LINES = HEADLINE_LINES.map((line) => {
   return { ...line, words };
 });
 
-// Realistic squash & stretch physics keyframe bounce
+// Realistic squash & stretch physics keyframe bounce - always visible by default
 const bounceVariants = {
   hidden: {
-    opacity: 0,
-    y: -48,
-    scaleY: 1.25,
-    scaleX: 0.88,
+    opacity: 1,
+    y: 0,
   },
   visible: (i) => ({
     opacity: 1,
-    y: [-48, 12, -6, 2, 0],
-    scaleY: [1.25, 0.82, 1.1, 0.96, 1],
-    scaleX: [0.88, 1.2, 0.94, 1.03, 1],
+    y: [-24, 8, -3, 0],
+    scale: [0.95, 1.08, 0.98, 1],
     transition: {
-      duration: 0.65,
-      delay: 0.12 + i * 0.026,
-      times: [0, 0.45, 0.7, 0.86, 1],
+      duration: 0.6,
+      delay: 0.04 + i * 0.018,
+      times: [0, 0.45, 0.75, 1],
       ease: 'easeOut',
     },
   }),
@@ -64,20 +61,10 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-center">
-          {/* Left Column: Headline, Subtitle, CTAs, Proof Pill (7 cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 xl:col-span-7 space-y-7 text-center lg:text-left"
-          >
+          {/* Left Column: Headline, Subtitle, CTAs, Proof Pill (7 cols) - Visible immediately */}
+          <div className="lg:col-span-6 xl:col-span-7 space-y-7 text-center lg:text-left">
             {/* Top Tagline Pill matching the image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A0D14] border border-amber-500/35 shadow-[0_0_20px_rgba(212,175,55,0.18)] backdrop-blur-md"
-            >
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A0D14] border border-amber-500/35 shadow-[0_0_20px_rgba(212,175,55,0.18)] backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-amber-300">
                 ROOM TO GROW.
@@ -86,7 +73,7 @@ export default function Hero() {
               <span className="text-xs font-mono text-slate-300">
                 Creative Marketing | Digital Agency
               </span>
-            </motion.div>
+            </div>
 
             {/* Main H1 Headline with Bounce text animation */}
             <h1
@@ -167,11 +154,11 @@ export default function Hero() {
                 <span className="text-emerald-400 font-semibold">100% On-Time Delivery</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Free-Floating Circular Motion Rings & Bigger Logobrand (5-6 cols) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 1, scale: 1 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
             className="lg:col-span-6 xl:col-span-5 flex items-center justify-center relative min-h-[480px] sm:min-h-[560px] select-none"

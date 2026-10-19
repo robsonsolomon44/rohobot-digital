@@ -67,10 +67,10 @@ export default function BrandsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center mb-14"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs font-mono text-amber-400 mb-4 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
@@ -92,10 +92,10 @@ export default function BrandsSection() {
         {/* SIGNATURE CLIENT LOGOS STAGE (STRUCTURED LIKE REFERENCE) */}
         {/* ======================================================== */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="rounded-3xl bg-[#080B12]/90 border border-amber-500/20 p-8 sm:p-14 lg:p-16 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative overflow-hidden mb-20"
         >
           {/* Subtle center spotlight glow */}
@@ -154,10 +154,10 @@ export default function BrandsSection() {
         {/* OUR OBJECTIVES FOR EVERY CLIENT                          */}
         {/* ======================================================== */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="p-8 sm:p-10 rounded-3xl bg-[#0A0D14] border border-amber-500/30 shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />

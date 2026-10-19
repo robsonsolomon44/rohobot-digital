@@ -45,10 +45,10 @@ export default function ServicesSection({ onSelectService }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row md:items-end justify-between mb-16"
         >
           <div>
@@ -77,10 +77,10 @@ export default function ServicesSection({ onSelectService }) {
           {services.map((service, idx) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
               className="h-full"
             >
               <TiltCard3D depth={25} glare={true} className="h-full bg-[#0A0D14] border border-amber-500/20">
@@ -142,10 +142,10 @@ export default function ServicesSection({ onSelectService }) {
 
         {/* 7. Why Choose ROHOBOT? Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="p-8 sm:p-12 rounded-3xl bg-[#0A0D14] border border-amber-500/30 shadow-[0_15px_45px_rgba(0,0,0,0.9)]"
         >
           <div className="max-w-2xl mb-10 text-center sm:text-left">

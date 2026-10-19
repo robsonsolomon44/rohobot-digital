@@ -110,7 +110,7 @@ function VideoCard({ project, onOpenModal }) {
                 muted={isMuted}
                 defaultMuted
                 playsInline
-                preload={isInView ? 'auto' : 'none'}
+                preload={isInView ? 'auto' : 'metadata'}
                 onLoadedData={() => setIsLoaded(true)}
                 onCanPlay={() => {
                   setIsLoaded(true);
@@ -124,20 +124,8 @@ function VideoCard({ project, onOpenModal }) {
                     setHasError(true);
                   }
                 }}
-                className={`w-full h-full object-cover transition-opacity duration-500 group-hover:scale-105 ${
-                  isLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-
-              {/* Loading Skeleton Placeholder while video initial frames buffer */}
-              {!isLoaded && !hasError && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070A10] animate-pulse pointer-events-none">
-                  <div className="w-12 h-12 rounded-full border border-amber-500/30 flex items-center justify-center mb-2 bg-amber-500/10">
-                    <Film className="w-6 h-6 text-amber-400" />
-                  </div>
-                  <span className="text-[11px] font-mono text-amber-300/70">Loading Video...</span>
-                </div>
-              )}
 
               {/* Error Fallback */}
               {hasError && (
@@ -360,10 +348,10 @@ export default function PortfolioShowcase({ onSelectProjectCTA }) {
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 1, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.3 }}
                 className="h-full"
               >
                 <VideoCard project={project} onOpenModal={handleOpenModal} />
