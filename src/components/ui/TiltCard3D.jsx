@@ -1,115 +1,76 @@
-import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useRef, useState, useCallback } from 'react';
 
 export default function TiltCard3D({
   children,
   className = '',
   glare = true,
-  maxTilt = 14,
-  depth = 40,
+  maxTilt = 10,
+  depth = 30,
 }) {
   const cardRef = useRef(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
 
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsTouch(
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
-      );
-    }
+  const handleMouseMove = useCallback((e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Percentage for glare
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+    setGlarePos({ x: xPercent, y: yPercent });
+
+    // Tilt angle
+    const tiltX = ((y / rect.height) - 0.5) * -maxTilt;
+    const tiltY = ((x / rect.width) - 0.5) * maxTilt;
+    setTilt({ x: tiltX, y: tiltY });
+  }, [maxTilt]);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
   }, []);
 
-  // Mouse coordinate values normalized between -0.5 and 0.5
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Cursor pixel positions for radial spotlight glare
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Spring physics for buttery-smooth dampening
-  const springConfig = { damping: 20, stiffness: 200, mass: 0.5 };
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [maxTilt, -maxTilt]), springConfig);
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-maxTilt, maxTilt]), springConfig);
-
-  const handleMouseMove = (e) => {
-    if (isTouch || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-
-    // Mouse coordinates relative to card
-    const clientX = e.clientX - rect.left;
-    const clientY = e.clientY - rect.top;
-
-    mouseX.set(clientX);
-    mouseY.set(clientY);
-
-    // Normalize between -0.5 and 0.5
-    const normalizedX = clientX / rect.width - 0.5;
-    const normalizedY = clientY / rect.height - 0.5;
-
-    x.set(normalizedX);
-    y.set(normalizedY);
-  };
-
-  const handleMouseEnter = () => {
-    if (!isTouch) setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (!isTouch) {
-      setIsHovered(false);
-      x.set(0);
-      y.set(0);
-    }
-  };
-
-  // On touch/mobile devices, return a streamlined hardware-accelerated 2D container
-  if (isTouch) {
-    return (
-      <div
-        className={`relative rounded-2xl border border-amber-500/25 bg-[#0A0D14]/90 transition-all duration-200 active:scale-[0.99] shadow-card-elevated ${className}`}
-      >
-        <div className="relative z-10 h-full w-full">
-          {children}
-        </div>
-      </div>
-    );
-  }
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+  }, []);
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
+        transform: isHovered
+          ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.01, 1.01, 1.01)`
+          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+        transition: isHovered
+          ? 'transform 0.1s ease-out'
+          : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease',
         transformStyle: 'preserve-3d',
       }}
-      className={`relative rounded-2xl transition-shadow duration-300 ${
-        isHovered ? 'shadow-[0_20px_50px_rgba(212,175,55,0.18)]' : 'shadow-card-elevated'
+      className={`relative rounded-2xl ${
+        isHovered
+          ? 'shadow-[0_20px_50px_rgba(212,175,55,0.18)]'
+          : 'shadow-card-elevated'
       } ${className}`}
     >
-      {/* Dynamic Cursor Spotlight Glare Overlay */}
+      {/* Glare effect */}
       {glare && (
-        <motion.div
-          className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 z-30"
+        <div
+          className="pointer-events-none absolute -inset-px rounded-2xl transition-opacity duration-300 z-30"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: useTransform(
-              [mouseX, mouseY],
-              ([xPos, yPos]) =>
-                `radial-gradient(circle 240px at ${xPos}px ${yPos}px, rgba(212, 175, 55, 0.18), transparent 75%)`
-            ),
+            background: `radial-gradient(circle 260px at ${glarePos.x}% ${glarePos.y}%, rgba(212, 175, 55, 0.16), transparent 70%)`,
           }}
         />
       )}
 
-      {/* Subtle Spatial Border Glow */}
+      {/* Spatial Border Glow */}
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl border transition-colors duration-300 z-20"
         style={{
@@ -128,6 +89,6 @@ export default function TiltCard3D({
       >
         {children}
       </div>
-    </motion.div>
+    </div>
   );
 }

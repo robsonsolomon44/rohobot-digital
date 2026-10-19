@@ -21,7 +21,6 @@ function VideoCard({ project, onOpenModal }) {
   const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   // Intersection Observer: Only play and decode when card enters viewport
@@ -61,8 +60,10 @@ function VideoCard({ project, onOpenModal }) {
           .catch(() => setIsPlaying(false));
       }
     } else {
-      video.pause();
-      setIsPlaying(false);
+      if (!video.paused) {
+        video.pause();
+        setIsPlaying(false);
+      }
     }
   }, [isInView, isMuted]);
 
@@ -111,7 +112,6 @@ function VideoCard({ project, onOpenModal }) {
                 defaultMuted
                 playsInline
                 preload={isInView ? 'auto' : 'metadata'}
-                onLoadedData={() => setIsLoaded(true)}
                 onCanPlay={() => {
                   setIsLoaded(true);
                   if (isInView && videoRef.current && videoRef.current.paused) {

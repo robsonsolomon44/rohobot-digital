@@ -32,7 +32,7 @@ export default function CollaborationForm({ preselectedTopic }) {
     company: '',
     email: '',
     phone: '',
-    goals: '',
+    goals: preselectedTopic ? `Interested in: ${preselectedTopic}. ` : '',
   });
 
   const [errors, setErrors] = useState({});
@@ -40,10 +40,13 @@ export default function CollaborationForm({ preselectedTopic }) {
 
   useEffect(() => {
     if (preselectedTopic) {
-      setFormData((prev) => ({
-        ...prev,
-        goals: `Interested in: ${preselectedTopic}. `,
-      }));
+      setFormData((prev) => {
+        if (prev.goals && prev.goals.includes(preselectedTopic)) return prev;
+        return {
+          ...prev,
+          goals: `Interested in: ${preselectedTopic}. ${prev.goals || ''}`,
+        };
+      });
     }
   }, [preselectedTopic]);
 
